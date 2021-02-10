@@ -49,18 +49,19 @@ const checkWin = function (reff, arr, playerConter, player) {
                 checkArr.push(item[i])
             }
         }
-        if ((ECLAIRS.length + DONUTS.length) === 9 && checkArr.length !== 3) {
-            drawWin();
-            console.log(checkArr)
-        }
-
+        
         if (checkArr.length === 3) {
             playerConter();
             addWin(player);
             battleArea.removeEventListener('click', userStep);
             winChecker = true;
+            return
         }; 
 
+        if ((ECLAIRS.length + DONUTS.length) === 9 && winChecker === false) {
+            drawWin();
+        }
+        
     });
 }
 
@@ -145,8 +146,6 @@ function drawWin() {
     contain.append(draw);
 }
 
-
-
 function deleteResultPopup() {
     win.remove();
     draw.remove();
@@ -158,5 +157,3 @@ function deleteError() {
 
 battleArea.addEventListener('click', userStep);
 resetBtn.addEventListener('click', resetMatch);
-
-console.log(battleArea)
