@@ -1,0 +1,128 @@
+* {
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+}
+
+.container {
+  font-family: Impact;
+  letter-spacing: 1px;
+  width: 50vw;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  margin: 0 auto;
+}
+
+.container h2 {
+  font-size: 3rem;
+}
+
+.container .player-counter {
+  margin: 0 0 20px 0;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  font-size: 1.5rem;
+}
+
+.container .player-counter div {
+  margin: 0 20px;
+}
+
+.container .battlePlace {
+  width: inherit;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+  width: 600px;
+}
+
+.container .battlePlace div {
+  width: 33%;
+  height: 200px;
+  background-color: #fff;
+  background-position: center;
+  background-size: contain;
+  border: 1px solid black;
+}
+
+.container .battlePlace .err {
+  background-color: #ff0000;
+}
+
+.container .resBtn {
+  padding: 1em 2em;
+  border-radius: 30px;
+  margin: 20px 0 0 0;
+  border: none;
+  background-color: white;
+  color: #000;
+  cursor: pointer;
+  outline: none;
+  -webkit-box-shadow: 0 1px 5px #00000046;
+          box-shadow: 0 1px 5px #00000046;
+  -webkit-transition: -webkit-box-shadow 0.4s;
+  transition: -webkit-box-shadow 0.4s;
+  transition: box-shadow 0.4s;
+  transition: box-shadow 0.4s, -webkit-box-shadow 0.4s;
+  font-size: 1.2rem;
+}
+
+.container .resBtn:hover {
+  -webkit-transition: 0.4s;
+  transition: 0.4s;
+  cursor: pointer;
+  -webkit-box-shadow: 0 10px 20px #00000046;
+          box-shadow: 0 10px 20px #00000046;
+}
+
+.error {
+  position: absolute;
+  border-radius: 70px;
+  display: -webkit-inline-box;
+  display: -ms-inline-flexbox;
+  display: inline-flex;
+  padding: 2em 3em;
+  background: #ff0000;
+  color: #fff;
+  font-size: 1.5rem;
+}
+
+.win {
+  position: absolute;
+  border-radius: 70px;
+  display: -webkit-inline-box;
+  display: -ms-inline-flexbox;
+  display: inline-flex;
+  padding: 2em 3em;
+  background: #09ff00;
+  color: #fff;
+  font-size: 1.5rem;
+  text-align: center;
+}
+
+.draw {
+  position: absolute;
+  border-radius: 70px;
+  display: -webkit-inline-box;
+  display: -ms-inline-flexbox;
+  display: inline-flex;
+  padding: 2em 3em;
+  background: #eeff00;
+  color: #fff;
+  font-size: 1.5rem;
+  text-align: center;
+}
+/*# sourceMappingURL=style.css.map */
