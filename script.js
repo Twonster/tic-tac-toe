@@ -114,6 +114,7 @@ function donutsStep() {
 
 const resetMatch = function () {
     roundCounter += 1;
+    winChecker = false;
     round.innerText = roundCounter;
     for (let i = 0; i < battleArea.children.length; i++) {
         battleArea.children[i].style = 'background-image: url()';
