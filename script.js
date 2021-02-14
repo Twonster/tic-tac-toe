@@ -8,7 +8,7 @@ const err = document.createElement('div');
 const win = document.createElement('div');
 const draw = document.createElement('div');
 
-const donut = 'https://www.freepnglogos.com/uploads/donut-png/onlinelabels-clip-art-rainbow-sprinkles-donut-30.png';
+const donut = 'donut.png';
 const eclairs = 'eclairs.png'
 
 const WINARR = [
@@ -40,28 +40,28 @@ const ECLAIRS = [];
 const DONUTS = [];
 let winChecker = false;
 
-const checkWin = function (reff, arr, playerConter, player) {
-    reff.forEach(item => {
+const checkWin = function (refferenceArr, userArr, playerConter, player) {
+    refferenceArr.forEach(item => {
         let checkArr = [];
 
         for (let i = 0; i < item.length; i++) {
-            if (arr.indexOf(item[i]) !== -1) {
+            if (userArr.indexOf(item[i]) !== -1) {
                 checkArr.push(item[i])
             }
         }
-        
+
         if (checkArr.length === 3) {
             playerConter();
-            addWin(player);
+            showNotification(win, 'win', `${player}\n WIN!`);
             battleArea.removeEventListener('click', userStep);
             winChecker = true;
             return
-        }; 
+        };
 
         if ((ECLAIRS.length + DONUTS.length) === 9 && winChecker === false) {
-            drawWin();
+            showNotification(draw, 'draw', `DRAW`);
         }
-        
+
     });
 }
 
@@ -73,45 +73,45 @@ const userStep = function (event) {
                 donutsStep();
             }
         } else {
-            addError();
-            setTimeout(deleteError, 2000)    
+            showNotification(err, 'error', 'NO');
+            setTimeout(deleteNotification, 1000, err)
         }
     }
 }
 
 function eclairsStep(event) {
-    if (DONUTS.indexOf(+event.target.id) === -1 && ECLAIRS.indexOf(+event.target.id) === -1) {
-        event.target.style = `background-image: url(${eclairs});`;
-        ECLAIRS.push(+event.target.id)
-        checkWin(WINARR, ECLAIRS, playerCounter1, 'Игрок 1');
-        battleArea.removeEventListener('click', userStep);
-    }
+    event.target.style = `background-image: url(${eclairs});`;
+    ECLAIRS.push(+event.target.id);
+    checkWin(WINARR, ECLAIRS, playerCounter1, 'Игрок 1');
+    battleArea.removeEventListener('click', userStep);
+}
+
+
+function getRandomInt(min, max) {
+    return Math.floor(Math.random() * (max - min)) + min;
 }
 
 function donutsStep() {
     let num = getRandomInt(1, 10);
-
-    function getRandomInt(min, max) {
-        min = Math.ceil(min);
-        max = Math.floor(max);
-        return Math.floor(Math.random() * (max - min)) + min;
-    }
+    let time = getRandomInt(1, 3);
 
     if (ECLAIRS.indexOf(+num) === -1 && DONUTS.indexOf(+num) === -1) {
-        function drawDonut() {
-            let place = document.getElementById(num);
-            place.style = `background-image: url(${donut})`;
-            DONUTS.push(+num);
-            checkWin(WINARR, DONUTS, playerCounter2, 'Игрок 2');
-            battleArea.addEventListener('click', userStep);
-        }
-        setTimeout(drawDonut, 1000)
+        setTimeout(drawDonut, time * 1000, num);
     } else if ((ECLAIRS.length + DONUTS.length) === 9) {
         return
     } else {
         donutsStep()
     }
 }
+
+function drawDonut(num) {
+    let place = document.getElementById(num);
+    place.style = `background-image: url(${donut})`;
+    DONUTS.push(+num);
+    checkWin(WINARR, DONUTS, playerCounter2, 'Игрок 2');
+    battleArea.addEventListener('click', userStep);
+}
+
 
 const resetMatch = function () {
     roundCounter += 1;
@@ -124,35 +124,18 @@ const resetMatch = function () {
     ECLAIRS.splice(0, ECLAIRS.length);
     DONUTS.splice(0, DONUTS.length);
 
-    deleteResultPopup();
+    deleteNotification(draw, win);
     battleArea.addEventListener('click', userStep);
 }
 
-function addError() {
-    err.classList = 'error';
-    err.innerText = 'NO!'
-    contain.append(err);
+function showNotification(elem, className, text) {
+    elem.classList = className;
+    elem.innerText = text;
+    contain.append(elem);
 }
 
-function addWin(player) {
-    win.classList = 'win';
-    win.innerText = `${player}\n WIN!`
-    contain.append(win);
-}
-
-function drawWin() {
-    draw.classList = 'draw';
-    draw.innerText = 'DRAW!'
-    contain.append(draw);
-}
-
-function deleteResultPopup() {
-    win.remove();
-    draw.remove();
-}
-
-function deleteError() {
-    err.remove()
+function deleteNotification(...prop) {
+    prop.forEach(item => item.remove())
 }
 
 battleArea.addEventListener('click', userStep);

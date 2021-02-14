@@ -50,12 +50,19 @@
 }
 
 .container .battlePlace div {
+  overflow: hidden;
   width: 33%;
   height: 200px;
   background-color: #fff;
   background-position: center;
   background-size: contain;
   border: 1px solid black;
+  transition: box-shadow, transform 0.3s;
+}
+.container .battlePlace div:hover {
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.203);
+  cursor: pointer;
+  transform: scale(1.02);
 }
 
 .container .battlePlace .err {
